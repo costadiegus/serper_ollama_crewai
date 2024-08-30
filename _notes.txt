@@ -1,0 +1,106 @@
+Para criar um repositório no GitHub e subir o código Python que você tem na sua máquina local usando o Poetry, siga os passos abaixo:
+
+### 1. Criar um novo repositório no GitHub:
+1. **Acesse o GitHub:** Vá para [github.com](https://github.com) e faça login na sua conta.
+2. **Crie um novo repositório:**
+   - Clique no ícone de “+” no canto superior direito da página e selecione “New repository”.
+   - Preencha o nome do repositório, uma descrição opcional e escolha se deseja que o repositório seja público ou privado.
+   - **Não** marque a opção de inicializar o repositório com um README, pois já vamos inicializar o repositório localmente.
+   - Clique em “Create repository”.
+
+### 2. Inicializar o repositório Git na pasta local:
+No seu notebook, siga os passos abaixo:
+
+1. **Abra o terminal na pasta onde está o seu código Python:**
+
+   ```bash
+   cd /caminho/para/sua/pasta
+   ```
+
+2. **Inicialize um repositório Git:**
+
+   ```bash
+   git init
+   ```
+
+3. **Adicione todos os arquivos ao repositório:**
+
+   ```bash
+   git add .
+   ```
+
+4. **Faça o primeiro commit:**
+
+   ```bash
+   git commit -m "Primeiro commit - adicionando código Python"
+   ```
+
+### 3. Conectar o repositório local ao repositório no GitHub:
+Agora, você precisa vincular o repositório local ao repositório remoto que você criou no GitHub.
+
+1. **Adicione o repositório remoto:**
+   
+   Substitua `URL_DO_SEU_REPOSITORIO` pelo URL que você obteve na página do GitHub após criar o repositório (algo como `https://github.com/seu-usuario/nome-do-repositorio.git`).
+
+   ```bash
+   git remote add origin URL_DO_SEU_REPOSITORIO
+   ```
+
+2. **Envie o código para o GitHub:**
+
+   ```bash
+   git push -u origin master
+   ```
+
+### 4. Configurar o Poetry no GitHub Actions (opcional):
+Se você quiser configurar o CI/CD usando o Poetry, você pode adicionar um workflow do GitHub Actions. Aqui está um exemplo básico:
+
+1. **Crie uma pasta `.github/workflows/` no seu projeto:**
+
+   ```bash
+   mkdir -p .github/workflows
+   ```
+
+2. **Crie um arquivo de workflow, por exemplo, `ci.yml`:**
+
+   ```yaml
+   name: CI
+
+   on: [push, pull_request]
+
+   jobs:
+     build:
+
+       runs-on: ubuntu-latest
+
+       steps:
+       - uses: actions/checkout@v2
+
+       - name: Set up Python
+         uses: actions/setup-python@v2
+         with:
+           python-version: '3.x'
+
+       - name: Install Poetry
+         run: |
+           curl -sSL https://install.python-poetry.org | python3 -
+           echo "$HOME/.local/bin" >> $GITHUB_PATH
+
+       - name: Install dependencies
+         run: poetry install
+
+       - name: Run tests
+         run: poetry run pytest
+   ```
+
+3. **Adicione e faça commit do arquivo:**
+
+   ```bash
+   git add .github/workflows/ci.yml
+   git commit -m "Adiciona configuração do CI com Poetry"
+   git push
+   ```
+
+Agora, o código Python está versionado no GitHub, e você também tem uma configuração básica de CI/CD para testar seu código usando o Poetry!
+
+Se precisar de mais alguma ajuda, estou à disposição! 🔨🤖🔧
