@@ -11,6 +11,7 @@ crewai = "^0.41.1"
 crewai-tools = "^0.4.26"
 langchain-ollama = "^0.1.2"
 langchain-openai = "^0.1.20"
+langchain-groq = "^0.1.9"
 
 
 [build-system]
