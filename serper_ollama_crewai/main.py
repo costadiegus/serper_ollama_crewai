@@ -150,6 +150,7 @@ crew = Crew(
     manager_llm=DEFAULT_LLM,
     function_calling_llm=DEFAULT_LLM,
     max_rpm=DEFAULT_MAX_RPM,
+    max_iter=2,
     allow_delegation=False,
 )
 
